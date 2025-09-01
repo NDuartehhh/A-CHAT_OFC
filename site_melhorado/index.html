@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All in One - Interface IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="logo.jpg" alt="All in One Logo" class="logo">
+                    <h2 class="app-name">All in One</h2>
+                </div>
+                <button class="new-chat-btn">
+                    <i class="fas fa-plus"></i>
+                    <span>Novo chat</span>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active" data-section="chat">
+                        <div class="nav-link">
+                            <div class="nav-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <span class="nav-text">Chat</span>
+                        </div>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-section="search">
+                        <div class="nav-link">
+                            <div class="nav-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <span class="nav-text">Buscar em chats</span>
+                        </div>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-section="image">
+                        <div class="nav-link">
+                            <div class="nav-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <span class="nav-text">Imagem</span>
+                        </div>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-section="audio">
+                        <div class="nav-link">
+                            <div class="nav-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <span class="nav-text">Voz</span>
+                        </div>
+                        <div class="nav-indicator"></div>
+                    </li>
+                    <li class="nav-item" data-section="video">
+                        <div class="nav-link">
+                            <div class="nav-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <span class="nav-text">Vídeo</span>
+                        </div>
+                        <div class="nav-indicator"></div>
+                    </li>
+                </ul>
+                
+                <div class="chat-history">
+                    <div class="history-header">
+                        <h3>Histórico</h3>
+                        <button class="clear-history-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <ul class="history-list">
+                        <li class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <span class="history-text">Saudação inicial</span>
+                            <button class="history-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </li>
+                        <li class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <span class="history-text">Ativar rascunho 3D</span>
+                            <button class="history-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </li>
+                        <li class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="history-text">Gesto de eureka</span>
+                            <button class="history-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </li>
+                        <li class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-heart-pulse"></i>
+                            </div>
+                            <span class="history-text">Roteiro sobre infarto</span>
+                            <button class="history-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </li>
+                        <li class="history-item active">
+                            <div class="history-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <span class="history-text">Chat Interface Design for AI</span>
+                            <button class="history-menu-btn">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="theme-toggle">
+                    <button class="theme-btn" id="themeToggle">
+                        <i class="fas fa-moon theme-icon"></i>
+                        <span class="theme-text">Modo Escuro</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <span>N</span>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Nicolas Augusto</span>
+                        <span class="user-status">Online</span>
+                    </div>
+                    <button class="user-menu-btn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <h1 class="section-title">All in One</h1>
+                        <span class="section-subtitle">Chat Interface Design for AI</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="action-btn" title="Memórias salvas">
+                            <i class="fas fa-brain"></i>
+                            <span class="action-text">Memórias salvas cheias</span>
+                        </button>
+                        <button class="action-btn share-btn" title="Compartilhar">
+                            <i class="fas fa-share"></i>
+                            <span class="action-text">Compartilhar</span>
+                        </button>
+                        <button class="action-btn menu-btn" title="Menu">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Chat Section -->
+                <section id="chat-section" class="section active">
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message ai-message">
+                                <div class="message-avatar">
+                                    <div class="avatar-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">All in One AI</span>
+                                        <span class="message-time">Agora</span>
+                                    </div>
+                                    <div class="message-text">
+                                        <p>Opa, Nicolas! 😊 Tudo bem com você?</p>
+                                        <p>Quer começar a trabalhar em algum projeto agora?</p>
+                                    </div>
+                                    <div class="message-actions">
+                                        <button class="action-btn" onclick="copyMessage(this)" title="Copiar">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="likeMessage(this)" title="Curtir">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="dislikeMessage(this)" title="Não curtir">
+                                            <i class="fas fa-thumbs-down"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="speakMessage(this)" title="Reproduzir">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="downloadMessage(this)" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="regenerateMessage(this)" title="Regenerar">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message user-message">
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">Você</span>
+                                        <span class="message-time">Agora</span>
+                                    </div>
+                                    <div class="message-text">
+                                        <p>como faça para colocar no modo escuro</p>
+                                    </div>
+                                </div>
+                                <div class="message-avatar">
+                                    <div class="avatar-icon user-avatar-icon">
+                                        <span>N</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="message ai-message">
+                                <div class="message-avatar">
+                                    <div class="avatar-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">All in One AI</span>
+                                        <span class="message-time">Agora</span>
+                                    </div>
+                                    <div class="message-text">
+                                        <p>Boa! 💡 Se você quiser colocar o <strong>All in One no modo escuro</strong>, faça assim:</p>
+                                        <ol>
+                                            <li>Clica no botão de <strong>alternância de tema</strong> na sidebar esquerda.</li>
+                                            <li>Ou use o atalho <strong>Ctrl + Shift + T</strong>.</li>
+                                            <li>O tema será alternado automaticamente entre claro e escuro! 🌙</li>
+                                        </ol>
+                                    </div>
+                                    <div class="message-actions">
+                                        <button class="action-btn" onclick="copyMessage(this)" title="Copiar">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="likeMessage(this)" title="Curtir">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="dislikeMessage(this)" title="Não curtir">
+                                            <i class="fas fa-thumbs-down"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="speakMessage(this)" title="Reproduzir">
+                                            <i class="fas fa-volume-up"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="downloadMessage(this)" title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                        <button class="action-btn" onclick="regenerateMessage(this)" title="Regenerar">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <div class="input-container">
+                                <button class="input-action-btn attach-btn" title="Anexar arquivo">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <div class="input-wrapper">
+                                    <textarea class="chat-input" placeholder="Pergunte alguma coisa..." rows="1" id="chatInput"></textarea>
+                                    <div class="input-actions">
+                                        <button class="input-action-btn voice-btn" title="Gravação de voz" id="voiceBtn">
+                                            <i class="fas fa-microphone"></i>
+                                        </button>
+                                        <button class="input-action-btn send-btn" title="Enviar mensagem" id="sendBtn">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search Section -->
+                <section id="search-section" class="section">
+                    <div class="search-container">
+                        <div class="search-header">
+                            <h2 class="section-title">Buscar em chats</h2>
+                            <p class="section-description">Encontre conversas anteriores rapidamente</p>
+                        </div>
+                        <div class="search-input-container">
+                            <div class="search-input-wrapper">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" class="search-input" placeholder="Buscar conversas... (Ctrl+K)" id="searchInput">
+                                <button class="search-clear-btn" id="searchClear">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="search-results" id="searchResults">
+                            <div class="search-placeholder">
+                                <i class="fas fa-search"></i>
+                                <p>Digite algo para buscar nos seus chats...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Image Section -->
+                <section id="image-section" class="section">
+                    <div class="generator-layout">
+                        <div class="generator-sidebar">
+                            <div class="sidebar-header">
+                                <h3 class="sidebar-title">
+                                    <i class="fas fa-image"></i>
+                                    Imagem
+                                </h3>
+                            </div>
+                            
+                            <div class="sidebar-content">
+                                <div class="prompt-section">
+                                    <label class="input-label">Descrição da imagem</label>
+                                    <textarea class="prompt-input" placeholder="Descreva sua imagem..." id="imagePrompt"></textarea>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">
+                                        <i class="fas fa-image"></i>
+                                        Imagem de referência
+                                    </label>
+                                    <div class="reference-upload" id="referenceUpload">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <span>Clique para fazer upload</span>
+                                        <input type="file" accept="image/*" hidden id="referenceInput">
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Modelo</label>
+                                    <select class="setting-select" id="imageModel">
+                                        <option value="art-v1">Art V1</option>
+                                        <option value="realistic">Realistic</option>
+                                        <option value="anime">Anime</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Resolução</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn" data-value="1:1">1:1</button>
+                                        <button class="option-btn active" data-value="9:21">9:21</button>
+                                        <button class="option-btn" data-value="21:9">21:9</button>
+                                        <button class="option-btn" data-value="custom">Mais</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Imagens por lote</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn active" data-value="1">1</button>
+                                        <button class="option-btn" data-value="2">2</button>
+                                        <button class="option-btn premium" data-value="3">3 ⭐</button>
+                                        <button class="option-btn premium" data-value="4">4 ⭐</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">
+                                        <i class="fas fa-cog"></i>
+                                        Configurações avançadas
+                                    </label>
+                                </div>
+                                
+                                <button class="generate-btn" id="generateImageBtn">
+                                    <i class="fas fa-magic"></i>
+                                    <span>Gerar #2</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="generator-main">
+                            <div class="generator-header">
+                                <div class="header-info">
+                                    <h2 class="section-title">Geração de Imagem</h2>
+                                    <p class="section-description">Crie imagens incríveis com IA</p>
+                                </div>
+                                <div class="generator-controls">
+                                    <button class="control-btn active" title="Buscar referências">
+                                        <i class="fas fa-search"></i>
+                                        <span class="control-count">10</span>
+                                    </button>
+                                    <button class="control-btn" title="Geração rápida">
+                                        <i class="fas fa-bolt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="results-area">
+                                <div class="results-grid" id="imageResults">
+                                    <div class="result-item">
+                                        <div class="result-image">
+                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjMkEyQTJBIi8+CjxwYXRoIGQ9Ik0yNTYgMTkyQzI3My42NzMgMTkyIDI4OCAxNzguNjczIDI88IDE2MUMyODggMTQzLjMyNyAyNzMuNjczIDEyOCAyNTYgMTI4QzIzOC4zMjcgMTI4IDIyNCAxNDMuMzI3IDIyNCAxNjFDMjI0IDE3OC42NzMgMjM4LjMyNyAxOTIgMjU2IDE5MloiIGZpbGw9IiM0QTRBNEEiLz4KPHBhdGggZD0iTTM4NCAzMjBIMTI4TDE5MiAyNTZMMjU2IDMyMEwzMjAgMjU2TDM4NCAzMjBaIiBmaWxsPSIjNEE0QTRBIi8+Cjwvc3ZnPgo=" alt="Imagem gerada">
+                                        </div>
+                                        <div class="result-info">
+                                            <span class="result-date">Hoje, 15:30</span>
+                                            <span class="result-size">1024 x 1024 (1:1)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Audio Section -->
+                <section id="audio-section" class="section">
+                    <div class="generator-layout">
+                        <div class="generator-sidebar">
+                            <div class="sidebar-header">
+                                <h3 class="sidebar-title">
+                                    <i class="fas fa-microphone"></i>
+                                    Voz
+                                </h3>
+                            </div>
+                            
+                            <div class="sidebar-content">
+                                <div class="mode-selector">
+                                    <button class="mode-btn active" data-mode="single">
+                                        <i class="fas fa-user"></i>
+                                        <span>Single-speaker audio</span>
+                                    </button>
+                                    <button class="mode-btn" data-mode="multi">
+                                        <i class="fas fa-users"></i>
+                                        <span>Multi-speaker audio</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">
+                                        <i class="fas fa-palette"></i>
+                                        Instruções de estilo
+                                    </label>
+                                    <textarea class="setting-textarea" placeholder="Read aloud in a warm and friendly tone:" id="styleInstructions"></textarea>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">
+                                        <i class="fas fa-file-text"></i>
+                                        Texto
+                                    </label>
+                                    <textarea class="setting-textarea" placeholder="Start writing or paste text here to generate speech" id="audioText"></textarea>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Temperatura</label>
+                                    <div class="slider-container">
+                                        <input type="range" class="setting-slider" min="0" max="2" step="0.1" value="1" id="temperatureSlider">
+                                        <span class="slider-value" id="temperatureValue">1</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Voz</label>
+                                    <select class="setting-select" id="voiceSelect">
+                                        <option value="zephyr">Zephyr</option>
+                                        <option value="aria">Aria</option>
+                                        <option value="nova">Nova</option>
+                                    </select>
+                                </div>
+                                
+                                <button class="generate-btn" id="generateAudioBtn">
+                                    <i class="fas fa-play"></i>
+                                    <span>Gerar Áudio</span>
+                                    <kbd>Ctrl+↵</kbd>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="generator-main">
+                            <div class="generator-header">
+                                <div class="header-info">
+                                    <h2 class="section-title">Geração de Áudio</h2>
+                                    <p class="section-description">Transforme texto em fala natural</p>
+                                </div>
+                            </div>
+                            
+                            <div class="results-area">
+                                <div class="quick-prompts">
+                                    <button class="quick-btn" data-prompt="to read a disclaimer, really fast">
+                                        Ler disclaimer rapidamente
+                                    </button>
+                                    <button class="quick-btn" data-prompt="campfire story">
+                                        História de fogueira
+                                    </button>
+                                    <button class="quick-btn" data-prompt="Use Gemini to greet you">
+                                        Saudação do Gemini
+                                    </button>
+                                </div>
+                                
+                                <div class="audio-results" id="audioResults">
+                                    <!-- Resultados de áudio aparecerão aqui -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Video Section -->
+                <section id="video-section" class="section">
+                    <div class="generator-layout">
+                        <div class="generator-sidebar">
+                            <div class="sidebar-header">
+                                <h3 class="sidebar-title">
+                                    <i class="fas fa-video"></i>
+                                    Vídeo
+                                </h3>
+                            </div>
+                            
+                            <div class="sidebar-content">
+                                <div class="prompt-section">
+                                    <label class="input-label">Descrição do vídeo</label>
+                                    <textarea class="prompt-input" placeholder="Descreva o vídeo que você quer criar..." id="videoPrompt"></textarea>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Modelo</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn active" data-value="v5">V5</button>
+                                        <button class="option-btn" data-value="img">Img</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Duração</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn active" data-value="5s">5s</button>
+                                        <button class="option-btn" data-value="10s">10s</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Resolução</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn" data-value="720p">720P</button>
+                                        <button class="option-btn premium active" data-value="1080p">1080P ⭐</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Proporção</label>
+                                    <div class="option-buttons">
+                                        <button class="option-btn" data-value="16:9">16:9</button>
+                                        <button class="option-btn" data-value="4:3">4:3</button>
+                                        <button class="option-btn" data-value="1:1">1:1</button>
+                                        <button class="option-btn" data-value="2:3">2:3</button>
+                                        <button class="option-btn active" data-value="9:16">9:16</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">
+                                        <i class="fas fa-cog"></i>
+                                        Configurações
+                                    </label>
+                                    <div class="toggle-list">
+                                        <div class="toggle-item">
+                                            <span>Efeitos Sonoros</span>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <span>Voz</span>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <div class="toggle-item">
+                                            <span>Modo Fora da Pista</span>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-group">
+                                    <label class="setting-label">Semente</label>
+                                    <div class="seed-input-container">
+                                        <input type="text" class="seed-input" value="1434643744" id="seedInput">
+                                        <button class="seed-random-btn" id="randomSeedBtn" title="Gerar semente aleatória">
+                                            <i class="fas fa-dice"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <button class="generate-btn" id="generateVideoBtn">
+                                    <i class="fas fa-video"></i>
+                                    <span>Criar Vídeo</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="generator-main">
+                            <div class="generator-header">
+                                <div class="header-info">
+                                    <h2 class="section-title">Geração de Vídeo</h2>
+                                    <p class="section-description">Crie vídeos incríveis com IA</p>
+                                </div>
+                            </div>
+                            
+                            <div class="results-area">
+                                <div class="results-section" id="videoResults">
+                                    <div class="no-results">
+                                        <i class="fas fa-video"></i>
+                                        <h3>Nenhum vídeo encontrado</h3>
+                                        <p>Comece a criar seu primeiro vídeo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Gerando conteúdo...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
