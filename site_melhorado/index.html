@@ -1,668 +1,538 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All in One - Interface IA</title>
+    <title>Grok Interface</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-container">
-                    <img src="logo.jpg" alt="All in One Logo" class="logo">
-                    <h2 class="app-name">All in One</h2>
+    <div class="grok-app">
+        <aside class="grok-sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar Grok" aria-label="Buscar Grok">
                 </div>
-                <button class="new-chat-btn">
-                    <i class="fas fa-plus"></i>
-                    <span>Novo chat</span>
+
+                <nav class="sidebar-nav" role="tablist" aria-label="Alternar seções principais">
+                    <p class="sidebar-label">Menu</p>
+                    <button class="nav-item is-active" data-target="chat" role="tab" id="tab-chat" aria-controls="view-chat" aria-selected="true" tabindex="0">
+                        <span class="nav-icon"><i class="fa-solid fa-comments"></i></span>
+                        <span>Bate-papo</span>
+                    </button>
+                    <button class="nav-item" data-target="voice" role="tab" id="tab-voice" aria-controls="view-voice" aria-selected="false" tabindex="-1">
+                        <span class="nav-icon"><i class="fa-solid fa-waveform-lines"></i></span>
+                        <span>Voz</span>
+                    </button>
+                    <button class="nav-item" data-target="image" role="tab" id="tab-image" aria-controls="view-image" aria-selected="false" tabindex="-1">
+                        <span class="nav-icon"><i class="fa-solid fa-image"></i></span>
+                        <span>Imagem</span>
+                    </button>
+                    <button class="nav-item" data-target="projects" role="tab" id="tab-projects" aria-controls="view-projects" aria-selected="false" tabindex="-1">
+                        <span class="nav-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                        <span>Projetos</span>
+                    </button>
+                    <button class="nav-item" data-target="history" role="tab" id="tab-history" aria-controls="view-history" aria-selected="false" tabindex="-1">
+                        <span class="nav-icon"><i class="fa-regular fa-clock"></i></span>
+                        <span>Histórico</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-history">
+                    <p class="sidebar-label">Hoje</p>
+                    <button class="history-item">
+                        <span class="history-icon"><i class="fa-regular fa-message"></i></span>
+                        <span>ChatGPT Clone Development</span>
+                    </button>
+                    <button class="history-item">
+                        <span class="history-icon"><i class="fa-regular fa-lightbulb"></i></span>
+                        <span>Respostas Diretas de Questões</span>
+                    </button>
+                    <button class="history-item">
+                        <span class="history-icon"><i class="fa-regular fa-compass"></i></span>
+                        <span>Minimalist Green Logo for</span>
+                    </button>
+                    <button class="history-item">
+                        <span class="history-icon"><i class="fa-regular fa-object-group"></i></span>
+                        <span>Logo Design: Natural Product</span>
+                    </button>
+                    <button class="history-item">
+                        <span class="history-icon"><i class="fa-solid fa-brain"></i></span>
+                        <span>Desenvolvimento Full-Stack</span>
+                    </button>
+                </div>
+            </div>
+
+            <footer class="sidebar-footer">
+                <div class="user-avatar">N</div>
+                <div class="user-info">
+                    <span class="user-name">Nicolas Augusto</span>
+                    <span class="user-plan">Plano Pro</span>
+                </div>
+                <button class="settings-btn" aria-label="Abrir configurações">
+                    <i class="fa-solid fa-ellipsis"></i>
                 </button>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <ul class="nav-list">
-                    <li class="nav-item active" data-section="chat">
-                        <div class="nav-link">
-                            <div class="nav-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <span class="nav-text">Chat</span>
-                        </div>
-                        <div class="nav-indicator"></div>
-                    </li>
-                    <li class="nav-item" data-section="search">
-                        <div class="nav-link">
-                            <div class="nav-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <span class="nav-text">Buscar em chats</span>
-                        </div>
-                        <div class="nav-indicator"></div>
-                    </li>
-                    <li class="nav-item" data-section="image">
-                        <div class="nav-link">
-                            <div class="nav-icon">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <span class="nav-text">Imagem</span>
-                        </div>
-                        <div class="nav-indicator"></div>
-                    </li>
-                    <li class="nav-item" data-section="audio">
-                        <div class="nav-link">
-                            <div class="nav-icon">
-                                <i class="fas fa-microphone"></i>
-                            </div>
-                            <span class="nav-text">Voz</span>
-                        </div>
-                        <div class="nav-indicator"></div>
-                    </li>
-                    <li class="nav-item" data-section="video">
-                        <div class="nav-link">
-                            <div class="nav-icon">
-                                <i class="fas fa-video"></i>
-                            </div>
-                            <span class="nav-text">Vídeo</span>
-                        </div>
-                        <div class="nav-indicator"></div>
-                    </li>
-                </ul>
-                
-                <div class="chat-history">
-                    <div class="history-header">
-                        <h3>Histórico</h3>
-                        <button class="clear-history-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <ul class="history-list">
-                        <li class="history-item">
-                            <div class="history-icon">
-                                <i class="fas fa-comment-dots"></i>
-                            </div>
-                            <span class="history-text">Saudação inicial</span>
-                            <button class="history-menu-btn">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </li>
-                        <li class="history-item">
-                            <div class="history-icon">
-                                <i class="fas fa-cube"></i>
-                            </div>
-                            <span class="history-text">Ativar rascunho 3D</span>
-                            <button class="history-menu-btn">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </li>
-                        <li class="history-item">
-                            <div class="history-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <span class="history-text">Gesto de eureka</span>
-                            <button class="history-menu-btn">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </li>
-                        <li class="history-item">
-                            <div class="history-icon">
-                                <i class="fas fa-heart-pulse"></i>
-                            </div>
-                            <span class="history-text">Roteiro sobre infarto</span>
-                            <button class="history-menu-btn">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </li>
-                        <li class="history-item active">
-                            <div class="history-icon">
-                                <i class="fas fa-palette"></i>
-                            </div>
-                            <span class="history-text">Chat Interface Design for AI</span>
-                            <button class="history-menu-btn">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <div class="theme-toggle">
-                    <button class="theme-btn" id="themeToggle">
-                        <i class="fas fa-moon theme-icon"></i>
-                        <span class="theme-text">Modo Escuro</span>
-                    </button>
-                </div>
-                <div class="user-profile">
-                    <div class="user-avatar">
-                        <span>N</span>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">Nicolas Augusto</span>
-                        <span class="user-status">Online</span>
-                    </div>
-                    <button class="user-menu-btn">
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                </div>
-            </div>
+            </footer>
         </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header">
-                <div class="header-left">
-                    <button class="sidebar-toggle" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
+        <main class="grok-main">
+            <div class="main-inner">
+                <header class="main-header">
+                    <button class="header-chip">
+                        <i class="fa-solid fa-lock"></i>
+                        Privado
                     </button>
-                    <div class="breadcrumb">
-                        <h1 class="section-title">All in One</h1>
-                        <span class="section-subtitle">Chat Interface Design for AI</span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="header-actions">
-                        <button class="action-btn" title="Memórias salvas">
-                            <i class="fas fa-brain"></i>
-                            <span class="action-text">Memórias salvas cheias</span>
-                        </button>
-                        <button class="action-btn share-btn" title="Compartilhar">
-                            <i class="fas fa-share"></i>
-                            <span class="action-text">Compartilhar</span>
-                        </button>
-                        <button class="action-btn menu-btn" title="Menu">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
+                </header>
 
-            <div class="content-area">
-                <!-- Chat Section -->
-                <section id="chat-section" class="section active">
-                    <div class="chat-container">
-                        <div class="chat-messages" id="chatMessages">
-                            <div class="message ai-message">
-                                <div class="message-avatar">
-                                    <div class="avatar-icon">
-                                        <i class="fas fa-robot"></i>
-                                    </div>
-                                </div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <span class="message-sender">All in One AI</span>
-                                        <span class="message-time">Agora</span>
-                                    </div>
-                                    <div class="message-text">
-                                        <p>Opa, Nicolas! 😊 Tudo bem com você?</p>
-                                        <p>Quer começar a trabalhar em algum projeto agora?</p>
-                                    </div>
-                                    <div class="message-actions">
-                                        <button class="action-btn" onclick="copyMessage(this)" title="Copiar">
-                                            <i class="fas fa-copy"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="likeMessage(this)" title="Curtir">
-                                            <i class="fas fa-thumbs-up"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="dislikeMessage(this)" title="Não curtir">
-                                            <i class="fas fa-thumbs-down"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="speakMessage(this)" title="Reproduzir">
-                                            <i class="fas fa-volume-up"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="downloadMessage(this)" title="Download">
-                                            <i class="fas fa-download"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="regenerateMessage(this)" title="Regenerar">
-                                            <i class="fas fa-redo"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                <section class="view view-chat is-active" data-view="chat" id="view-chat" role="tabpanel" aria-labelledby="tab-chat" aria-hidden="false">
+                    <div class="grok-hero">
+                        <div class="hero-stack">
+                            <div class="hero-logo">
+                                <svg viewBox="0 0 64 64" aria-hidden="true">
+                                    <path d="M54 19.5C54 31 44.6 40.4 33.1 40.4c-3.2 0-6.1-.7-8.6-1.9l4.9-8c1 .4 2.2.6 3.4.6 5 0 9-4.1 9-9.2 0-5.3-4.1-9.4-9.3-9.4-7.3 0-12.6 6.1-12.6 14.3v3.6l-9.9 3.8c-.5-2-1-4.2-1-6.7C9 13.1 19 2 32.5 2 46.4 2 54 12.3 54 19.5z"/>
+                                    <path d="M10 44.4C10 33 19.5 23.6 31 23.6c3.2 0 6.1.7 8.6 1.9l-4.9 8c-1-.4-2.2-.6-3.4-.6-5 0-9 4.1-9 9.2 0 5.3 4.1 9.4 9.3 9.4 7.3 0 12.6-6.1 12.6-14.3v-3.6l9.9-3.8c.5 2 1 4.2 1 6.7C55 50.9 45 62 31.5 62 17.6 62 10 51.7 10 44.4z"/>
+                                </svg>
+                                <span>Grok</span>
                             </div>
-                            
-                            <div class="message user-message">
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <span class="message-sender">Você</span>
-                                        <span class="message-time">Agora</span>
-                                    </div>
-                                    <div class="message-text">
-                                        <p>como faça para colocar no modo escuro</p>
-                                    </div>
-                                </div>
-                                <div class="message-avatar">
-                                    <div class="avatar-icon user-avatar-icon">
-                                        <span>N</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="message ai-message">
-                                <div class="message-avatar">
-                                    <div class="avatar-icon">
-                                        <i class="fas fa-robot"></i>
-                                    </div>
-                                </div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <span class="message-sender">All in One AI</span>
-                                        <span class="message-time">Agora</span>
-                                    </div>
-                                    <div class="message-text">
-                                        <p>Boa! 💡 Se você quiser colocar o <strong>All in One no modo escuro</strong>, faça assim:</p>
-                                        <ol>
-                                            <li>Clica no botão de <strong>alternância de tema</strong> na sidebar esquerda.</li>
-                                            <li>Ou use o atalho <strong>Ctrl + Shift + T</strong>.</li>
-                                            <li>O tema será alternado automaticamente entre claro e escuro! 🌙</li>
-                                        </ol>
-                                    </div>
-                                    <div class="message-actions">
-                                        <button class="action-btn" onclick="copyMessage(this)" title="Copiar">
-                                            <i class="fas fa-copy"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="likeMessage(this)" title="Curtir">
-                                            <i class="fas fa-thumbs-up"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="dislikeMessage(this)" title="Não curtir">
-                                            <i class="fas fa-thumbs-down"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="speakMessage(this)" title="Reproduzir">
-                                            <i class="fas fa-volume-up"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="downloadMessage(this)" title="Download">
-                                            <i class="fas fa-download"></i>
-                                        </button>
-                                        <button class="action-btn" onclick="regenerateMessage(this)" title="Regenerar">
-                                            <i class="fas fa-redo"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="chat-input-area">
-                            <div class="input-container">
-                                <button class="input-action-btn attach-btn" title="Anexar arquivo">
-                                    <i class="fas fa-paperclip"></i>
-                                </button>
-                                <div class="input-wrapper">
-                                    <textarea class="chat-input" placeholder="Pergunte alguma coisa..." rows="1" id="chatInput"></textarea>
-                                    <div class="input-actions">
-                                        <button class="input-action-btn voice-btn" title="Gravação de voz" id="voiceBtn">
-                                            <i class="fas fa-microphone"></i>
-                                        </button>
-                                        <button class="input-action-btn send-btn" title="Enviar mensagem" id="sendBtn">
-                                            <i class="fas fa-paper-plane"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                            <p class="hero-subtitle">O que você quer saber?</p>
 
-                <!-- Search Section -->
-                <section id="search-section" class="section">
-                    <div class="search-container">
-                        <div class="search-header">
-                            <h2 class="section-title">Buscar em chats</h2>
-                            <p class="section-description">Encontre conversas anteriores rapidamente</p>
-                        </div>
-                        <div class="search-input-container">
-                            <div class="search-input-wrapper">
-                                <i class="fas fa-search search-icon"></i>
-                                <input type="text" class="search-input" placeholder="Buscar conversas... (Ctrl+K)" id="searchInput">
-                                <button class="search-clear-btn" id="searchClear">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="search-results" id="searchResults">
-                            <div class="search-placeholder">
-                                <i class="fas fa-search"></i>
-                                <p>Digite algo para buscar nos seus chats...</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Image Section -->
-                <section id="image-section" class="section">
-                    <div class="generator-layout">
-                        <div class="generator-sidebar">
-                            <div class="sidebar-header">
-                                <h3 class="sidebar-title">
-                                    <i class="fas fa-image"></i>
-                                    Imagem
-                                </h3>
-                            </div>
-                            
-                            <div class="sidebar-content">
-                                <div class="prompt-section">
-                                    <label class="input-label">Descrição da imagem</label>
-                                    <textarea class="prompt-input" placeholder="Descreva sua imagem..." id="imagePrompt"></textarea>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">
-                                        <i class="fas fa-image"></i>
-                                        Imagem de referência
-                                    </label>
-                                    <div class="reference-upload" id="referenceUpload">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                        <span>Clique para fazer upload</span>
-                                        <input type="file" accept="image/*" hidden id="referenceInput">
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Modelo</label>
-                                    <select class="setting-select" id="imageModel">
-                                        <option value="art-v1">Art V1</option>
-                                        <option value="realistic">Realistic</option>
-                                        <option value="anime">Anime</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Resolução</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn" data-value="1:1">1:1</button>
-                                        <button class="option-btn active" data-value="9:21">9:21</button>
-                                        <button class="option-btn" data-value="21:9">21:9</button>
-                                        <button class="option-btn" data-value="custom">Mais</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Imagens por lote</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn active" data-value="1">1</button>
-                                        <button class="option-btn" data-value="2">2</button>
-                                        <button class="option-btn premium" data-value="3">3 ⭐</button>
-                                        <button class="option-btn premium" data-value="4">4 ⭐</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">
-                                        <i class="fas fa-cog"></i>
-                                        Configurações avançadas
-                                    </label>
-                                </div>
-                                
-                                <button class="generate-btn" id="generateImageBtn">
-                                    <i class="fas fa-magic"></i>
-                                    <span>Gerar #2</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="generator-main">
-                            <div class="generator-header">
-                                <div class="header-info">
-                                    <h2 class="section-title">Geração de Imagem</h2>
-                                    <p class="section-description">Crie imagens incríveis com IA</p>
-                                </div>
-                                <div class="generator-controls">
-                                    <button class="control-btn active" title="Buscar referências">
-                                        <i class="fas fa-search"></i>
-                                        <span class="control-count">10</span>
+                            <div class="query-wrapper">
+                                <div class="query-input">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="O que você quer saber?" aria-label="O que você quer saber?">
+                                    <button class="query-tool" aria-label="Adicionar conteúdo">
+                                        <i class="fa-solid fa-plus"></i>
                                     </button>
-                                    <button class="control-btn" title="Geração rápida">
-                                        <i class="fas fa-bolt"></i>
+                                    <button class="query-mic" aria-label="Iniciar pesquisa por voz">
+                                        <i class="fa-solid fa-microphone"></i>
                                     </button>
                                 </div>
+                                <button class="query-mode" aria-haspopup="true" aria-expanded="false">
+                                    <span>Rápido</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
                             </div>
-                            
-                            <div class="results-area">
-                                <div class="results-grid" id="imageResults">
-                                    <div class="result-item">
-                                        <div class="result-image">
-                                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjMkEyQTJBIi8+CjxwYXRoIGQ9Ik0yNTYgMTkyQzI3My42NzMgMTkyIDI4OCAxNzguNjczIDI88IDE2MUMyODggMTQzLjMyNyAyNzMuNjczIDEyOCAyNTYgMTI4QzIzOC4zMjcgMTI4IDIyNCAxNDMuMzI3IDIyNCAxNjFDMjI0IDE3OC42NzMgMjM4LjMyNyAxOTIgMjU2IDE5MloiIGZpbGw9IiM0QTRBNEEiLz4KPHBhdGggZD0iTTM4NCAzMjBIMTI4TDE5MiAyNTZMMjU2IDMyMEwzMjAgMjU2TDM4NCAzMjBaIiBmaWxsPSIjNEE0QTRBIi8+Cjwvc3ZnPgo=" alt="Imagem gerada">
-                                        </div>
-                                        <div class="result-info">
-                                            <span class="result-date">Hoje, 15:30</span>
-                                            <span class="result-size">1024 x 1024 (1:1)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Audio Section -->
-                <section id="audio-section" class="section">
-                    <div class="generator-layout">
-                        <div class="generator-sidebar">
-                            <div class="sidebar-header">
-                                <h3 class="sidebar-title">
-                                    <i class="fas fa-microphone"></i>
+                            <div class="quick-actions">
+                                <button class="action-chip" data-action="deepsearch">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    DeepSearch
+                                </button>
+                                <button class="action-chip" data-action="image">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                    Create Image
+                                </button>
+                                <button class="action-chip" data-action="news">
+                                    <i class="fa-solid fa-newspaper"></i>
+                                    Notícias mais recentes
+                                </button>
+                                <button class="action-chip" data-action="voice">
+                                    <i class="fa-solid fa-waveform-lines"></i>
                                     Voz
-                                </h3>
-                            </div>
-                            
-                            <div class="sidebar-content">
-                                <div class="mode-selector">
-                                    <button class="mode-btn active" data-mode="single">
-                                        <i class="fas fa-user"></i>
-                                        <span>Single-speaker audio</span>
-                                    </button>
-                                    <button class="mode-btn" data-mode="multi">
-                                        <i class="fas fa-users"></i>
-                                        <span>Multi-speaker audio</span>
-                                    </button>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">
-                                        <i class="fas fa-palette"></i>
-                                        Instruções de estilo
-                                    </label>
-                                    <textarea class="setting-textarea" placeholder="Read aloud in a warm and friendly tone:" id="styleInstructions"></textarea>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">
-                                        <i class="fas fa-file-text"></i>
-                                        Texto
-                                    </label>
-                                    <textarea class="setting-textarea" placeholder="Start writing or paste text here to generate speech" id="audioText"></textarea>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Temperatura</label>
-                                    <div class="slider-container">
-                                        <input type="range" class="setting-slider" min="0" max="2" step="0.1" value="1" id="temperatureSlider">
-                                        <span class="slider-value" id="temperatureValue">1</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Voz</label>
-                                    <select class="setting-select" id="voiceSelect">
-                                        <option value="zephyr">Zephyr</option>
-                                        <option value="aria">Aria</option>
-                                        <option value="nova">Nova</option>
-                                    </select>
-                                </div>
-                                
-                                <button class="generate-btn" id="generateAudioBtn">
-                                    <i class="fas fa-play"></i>
-                                    <span>Gerar Áudio</span>
-                                    <kbd>Ctrl+↵</kbd>
                                 </button>
                             </div>
-                        </div>
-                        
-                        <div class="generator-main">
-                            <div class="generator-header">
-                                <div class="header-info">
-                                    <h2 class="section-title">Geração de Áudio</h2>
-                                    <p class="section-description">Transforme texto em fala natural</p>
+
+                            <div class="promo-card">
+                                <div class="promo-content">
+                                    <div class="promo-badge">SuperGrok</div>
+                                    <h3>Desbloqueie recursos avançados</h3>
+                                    <p>Descubra respostas mais rápidas e profundas com o plano Pro.</p>
                                 </div>
+                                <button class="promo-action" data-open-modal="plans">Atualizar</button>
                             </div>
-                            
-                            <div class="results-area">
-                                <div class="quick-prompts">
-                                    <button class="quick-btn" data-prompt="to read a disclaimer, really fast">
-                                        Ler disclaimer rapidamente
-                                    </button>
-                                    <button class="quick-btn" data-prompt="campfire story">
-                                        História de fogueira
-                                    </button>
-                                    <button class="quick-btn" data-prompt="Use Gemini to greet you">
-                                        Saudação do Gemini
-                                    </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="view view-voice" data-view="voice" id="view-voice" role="tabpanel" aria-labelledby="tab-voice" aria-hidden="true" hidden>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Converse com sua voz</h2>
+                            <p>Use o Grok para responder em tempo real com clareza e naturalidade.</p>
+                        </div>
+                        <div class="voice-display">
+                            <div class="voice-glow"></div>
+                            <div class="voice-controls">
+                                <button class="voice-btn is-primary"><i class="fa-solid fa-microphone"></i> Começar sessão</button>
+                                <button class="voice-btn"><i class="fa-solid fa-waveform"></i> Ver transcrição</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="view view-image" data-view="image" id="view-image" role="tabpanel" aria-labelledby="tab-image" aria-hidden="true" hidden>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Crie imagens com o Grok</h2>
+                            <p>Transforme descrições em composições visuais usando o Grok Vision.</p>
+                        </div>
+                        <div class="image-grid">
+                            <div class="image-card">Explorar estilos</div>
+                            <div class="image-card">Carregar referência</div>
+                            <div class="image-card">Histórico de renders</div>
+                            <div class="image-card">Modelos disponíveis</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="view view-projects" data-view="projects" id="view-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true" hidden>
+                    <div class="workspace">
+                        <header class="workspace-header">
+                            <h2>Projetos</h2>
+                            <div class="workspace-actions">
+                                <div class="input-pill">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar projetos">
                                 </div>
-                                
-                                <div class="audio-results" id="audioResults">
-                                    <!-- Resultados de áudio aparecerão aqui -->
+                                <button class="pill-action" data-open-modal="business">Criar equipe</button>
+                            </div>
+                        </header>
+                        <div class="workspace-body">
+                            <aside class="workspace-nav">
+                                <p class="workspace-label">Ações</p>
+                                <button class="workspace-item is-active" aria-pressed="true">Criar novo chat privado</button>
+                                <button class="workspace-item" aria-pressed="false">Quadros compartilhados</button>
+                                <button class="workspace-item" aria-pressed="false">Automatizações</button>
+                                <button class="workspace-item" aria-pressed="false">Templates recentes</button>
+                                <p class="workspace-label">Hoje</p>
+                                <button class="workspace-item" aria-pressed="false">ChatGPT Clone Development Guide</button>
+                                <button class="workspace-item" aria-pressed="false">Respostas Diretas de Questões Variadas</button>
+                                <button class="workspace-item" aria-pressed="false">Minimalist Green Logo for Natural Brand</button>
+                                <button class="workspace-item" aria-pressed="false">Desenvolvimento Full-Stack: Fase Piloto</button>
+                                <button class="workspace-item" aria-pressed="false">Geração de Imagem com Plataforma IA</button>
+                            </aside>
+                            <div class="workspace-preview">
+                                <div class="preview-empty">
+                                    <h3>Selecione uma conversa para pré-visualizar</h3>
+                                    <p>Escolha um projeto à esquerda para ver seus detalhes e retomar de onde parou.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Video Section -->
-                <section id="video-section" class="section">
-                    <div class="generator-layout">
-                        <div class="generator-sidebar">
-                            <div class="sidebar-header">
-                                <h3 class="sidebar-title">
-                                    <i class="fas fa-video"></i>
-                                    Vídeo
-                                </h3>
+                <section class="view view-history" data-view="history" id="view-history" role="tabpanel" aria-labelledby="tab-history" aria-hidden="true" hidden>
+                    <div class="history-panel">
+                        <header class="history-header">
+                            <h2>Histórico</h2>
+                            <div class="input-pill">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Pesquisar" aria-label="Pesquisar no histórico">
                             </div>
-                            
-                            <div class="sidebar-content">
-                                <div class="prompt-section">
-                                    <label class="input-label">Descrição do vídeo</label>
-                                    <textarea class="prompt-input" placeholder="Descreva o vídeo que você quer criar..." id="videoPrompt"></textarea>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Modelo</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn active" data-value="v5">V5</button>
-                                        <button class="option-btn" data-value="img">Img</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Duração</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn active" data-value="5s">5s</button>
-                                        <button class="option-btn" data-value="10s">10s</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Resolução</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn" data-value="720p">720P</button>
-                                        <button class="option-btn premium active" data-value="1080p">1080P ⭐</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Proporção</label>
-                                    <div class="option-buttons">
-                                        <button class="option-btn" data-value="16:9">16:9</button>
-                                        <button class="option-btn" data-value="4:3">4:3</button>
-                                        <button class="option-btn" data-value="1:1">1:1</button>
-                                        <button class="option-btn" data-value="2:3">2:3</button>
-                                        <button class="option-btn active" data-value="9:16">9:16</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">
-                                        <i class="fas fa-cog"></i>
-                                        Configurações
-                                    </label>
-                                    <div class="toggle-list">
-                                        <div class="toggle-item">
-                                            <span>Efeitos Sonoros</span>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" checked>
-                                                <span class="toggle-slider"></span>
-                                            </label>
-                                        </div>
-                                        <div class="toggle-item">
-                                            <span>Voz</span>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" checked>
-                                                <span class="toggle-slider"></span>
-                                            </label>
-                                        </div>
-                                        <div class="toggle-item">
-                                            <span>Modo Fora da Pista</span>
-                                            <label class="toggle-switch">
-                                                <input type="checkbox">
-                                                <span class="toggle-slider"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="setting-group">
-                                    <label class="setting-label">Semente</label>
-                                    <div class="seed-input-container">
-                                        <input type="text" class="seed-input" value="1434643744" id="seedInput">
-                                        <button class="seed-random-btn" id="randomSeedBtn" title="Gerar semente aleatória">
-                                            <i class="fas fa-dice"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <button class="generate-btn" id="generateVideoBtn">
-                                    <i class="fas fa-video"></i>
-                                    <span>Criar Vídeo</span>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="generator-main">
-                            <div class="generator-header">
-                                <div class="header-info">
-                                    <h2 class="section-title">Geração de Vídeo</h2>
-                                    <p class="section-description">Crie vídeos incríveis com IA</p>
-                                </div>
-                            </div>
-                            
-                            <div class="results-area">
-                                <div class="results-section" id="videoResults">
-                                    <div class="no-results">
-                                        <i class="fas fa-video"></i>
-                                        <h3>Nenhum vídeo encontrado</h3>
-                                        <p>Comece a criar seu primeiro vídeo</p>
-                                    </div>
-                                </div>
-                            </div>
+                        </header>
+                        <div class="history-list">
+                            <button class="history-entry">
+                                <span class="entry-title">ChatGPT Clone Development Guide</span>
+                                <span class="entry-time">Há 2 horas</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Respostas Diretas de Questões Variadas</span>
+                                <span class="entry-time">Há 2 horas</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Minimalist Green Logo for Natural Brand</span>
+                                <span class="entry-time">18 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Desenvolvimento Full-Stack: Fase Piloto</span>
+                                <span class="entry-time">16 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Documentação Técnica para Desenvolvimento</span>
+                                <span class="entry-time">14 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Geração de Imagem com Plataforma IA</span>
+                                <span class="entry-time">14 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Computador preparado com GrokOS</span>
+                                <span class="entry-time">13 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Doutor preocupado com Virago e Maçã</span>
+                                <span class="entry-time">12 de out.</span>
+                            </button>
+                            <button class="history-entry">
+                                <span class="entry-title">Imagem Editorial: Vintage, Grunge, Estilo Noir</span>
+                                <span class="entry-time">9 de out.</span>
+                            </button>
                         </div>
                     </div>
                 </section>
             </div>
         </main>
-    </div>
 
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <p class="loading-text">Gerando conteúdo...</p>
+        <div class="floating-menu mode-menu" role="menu" aria-hidden="true" hidden>
+            <div class="menu-section">
+                <p class="menu-label">Selecione o modo</p>
+                <button class="menu-item" data-mode="auto">
+                    <div>
+                        <span class="menu-title">Automático</span>
+                        <span class="menu-subtitle">Escolha o melhor modo para você</span>
+                    </div>
+                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
+                </button>
+                <button class="menu-item is-active" data-mode="fast">
+                    <div>
+                        <span class="menu-title">Rápido</span>
+                        <span class="menu-subtitle">Respostas rápidas</span>
+                    </div>
+                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
+                </button>
+                <button class="menu-item" data-mode="expert">
+                    <div>
+                        <span class="menu-title">Especialista</span>
+                        <span class="menu-subtitle">Equipe de especialistas</span>
+                    </div>
+                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
+                </button>
+                <button class="menu-item" data-mode="grokfast">
+                    <div>
+                        <span class="menu-title">Grok-4 Fast <span class="badge">Beta</span></span>
+                        <span class="menu-subtitle">Heavy</span>
+                    </div>
+                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
+                </button>
+            </div>
+            <div class="menu-section">
+                <button class="menu-item" data-open-modal="plans">
+                    <div>
+                        <span class="menu-title">SuperGrok</span>
+                        <span class="menu-subtitle">Desbloquear recursos estendidos</span>
+                    </div>
+                    <span class="menu-link">Atualizar</span>
+                </button>
+                <button class="menu-item" data-mode="custom">
+                    <div>
+                        <span class="menu-title">Instruções personalizadas</span>
+                        <span class="menu-subtitle">Defina respostas sob medida</span>
+                    </div>
+                    <span class="menu-link">Personalizar</span>
+                </button>
+                <button class="menu-item" data-mode="models">
+                    <div>
+                        <span class="menu-title">Modelos</span>
+                        <span class="menu-subtitle">Automático</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="floating-menu attach-menu" role="menu" aria-hidden="true" hidden>
+            <div class="menu-section">
+                <button class="menu-item">
+                    <div>
+                        <span class="menu-title">Carregar um arquivo</span>
+                        <span class="menu-subtitle">Anexe documentos diretamente</span>
+                    </div>
+                </button>
+                <button class="menu-item">
+                    <div>
+                        <span class="menu-title">Adicionar conteúdo de texto</span>
+                        <span class="menu-subtitle">Cole ou digite um texto longo</span>
+                    </div>
+                </button>
+                <button class="menu-item">
+                    <div>
+                        <span class="menu-title">Conecte o Google Drive</span>
+                        <span class="menu-subtitle">Importe documentos do Drive</span>
+                    </div>
+                </button>
+                <button class="menu-item">
+                    <div>
+                        <span class="menu-title">Conectar Microsoft OneDrive</span>
+                        <span class="menu-subtitle">Integre com seus arquivos</span>
+                    </div>
+                </button>
+                <button class="menu-item">
+                    <div>
+                        <span class="menu-title">Recentes</span>
+                        <span class="menu-subtitle">Veja os últimos uploads</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-plans" aria-hidden="true" role="dialog" aria-modal="true" hidden>
+            <div class="modal-backdrop" data-close-modal></div>
+            <div class="modal-content">
+                <header class="modal-header">
+                    <div class="modal-tabs" role="tablist">
+                        <button class="modal-tab is-active" data-tab="individual" role="tab" aria-selected="true">Individual</button>
+                        <button class="modal-tab" data-tab="business" role="tab" aria-selected="false">Empresa</button>
+                    </div>
+                    <button class="modal-close" data-close-modal aria-label="Fechar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </header>
+                <div class="modal-body">
+                    <section class="plans-view is-active" data-tab-panel="individual">
+                        <h2>SuperGrok</h2>
+                        <p class="modal-subtitle">Apresentando o Grok-4, o modelo de IA mais poderoso</p>
+                        <div class="plans-grid">
+                            <article class="plan-card">
+                                <header>
+                                    <div class="plan-tag">Free</div>
+                                    <h3>Plano atual</h3>
+                                </header>
+                                <ul>
+                                    <li>Acesso ilimitado ao Grok 3</li>
+                                    <li>Modo de imagem Aurora</li>
+                                    <li>Respostas em voz</li>
+                                    <li>Histórico sincronizado</li>
+                                </ul>
+                                <button class="plan-btn" disabled>Ativo</button>
+                            </article>
+                            <article class="plan-card highlight">
+                                <header>
+                                    <div class="plan-tag">SuperGrok</div>
+                                    <h3>Atualize para SuperGrok</h3>
+                                    <span class="plan-price">$30,00<span>/mês</span></span>
+                                </header>
+                                <ul>
+                                    <li>Maior acesso ao Grok 4</li>
+                                    <li>Substituir e dividir tarefas</li>
+                                    <li>Modelos de imagem avançados</li>
+                                    <li>Acesso prioritário a novos recursos</li>
+                                </ul>
+                                <button class="plan-btn" data-open-modal="business">Criar uma equipe</button>
+                            </article>
+                            <article class="plan-card">
+                                <header>
+                                    <div class="plan-tag">SuperGrok Heavy</div>
+                                    <h3>Heavy</h3>
+                                    <span class="plan-price">$300,00<span>/mês</span></span>
+                                </header>
+                                <ul>
+                                    <li>O melhor para cargas intensas</li>
+                                    <li>Equipe dedicada de especialistas</li>
+                                    <li>Conectores avançados</li>
+                                    <li>Companheiros de telefone via Valet</li>
+                                </ul>
+                                <button class="plan-btn">Atualizar</button>
+                                <p class="plan-note">Economize com cobrança anual</p>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="plans-view" data-tab-panel="business">
+                        <h2>SuperGrok</h2>
+                        <p class="modal-subtitle">Amplie a inteligência da sua organização</p>
+                        <div class="plans-grid">
+                            <article class="plan-card highlight">
+                                <header>
+                                    <div class="plan-tag">Equipe</div>
+                                    <h3>Grok Business</h3>
+                                    <span class="plan-price">$30,00<span>/assento</span></span>
+                                </header>
+                                <ul>
+                                    <li>Tudo do SuperGrok</li>
+                                    <li>Compartilhamento colaborativo</li>
+                                    <li>Suíte avançada de ferramentas</li>
+                                    <li>Suporte dedicado</li>
+                                </ul>
+                                <button class="plan-btn" data-open-modal="business">Criar uma equipe</button>
+                            </article>
+                            <article class="plan-card">
+                                <header>
+                                    <div class="plan-tag">Empresarial</div>
+                                    <h3>Let's Talk</h3>
+                                </header>
+                                <ul>
+                                    <li>Usuários ilimitados</li>
+                                    <li>Logins únicos (SSO)</li>
+                                    <li>Controles de segurança (SCIM)</li>
+                                    <li>Treinamento e suporte prioritário</li>
+                                </ul>
+                                <button class="plan-btn">Entre em contato</button>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-business" aria-hidden="true" role="dialog" aria-modal="true" hidden>
+            <div class="modal-backdrop" data-close-modal></div>
+            <div class="modal-content">
+                <header class="modal-header">
+                    <div class="modal-tabs" role="tablist">
+                        <button class="modal-tab is-active" data-tab="team" role="tab" aria-selected="true">Individual</button>
+                        <button class="modal-tab" data-tab="enterprise" role="tab" aria-selected="false">Empresa</button>
+                    </div>
+                    <button class="modal-close" data-close-modal aria-label="Fechar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </header>
+                <div class="modal-body">
+                    <section class="plans-view is-active" data-tab-panel="team">
+                        <h2>Grok Business</h2>
+                        <p class="modal-subtitle">Desperte o gênio coletivo</p>
+                        <div class="business-grid">
+                            <article class="business-card">
+                                <header>
+                                    <h3>$30,00</h3>
+                                    <span>/assento</span>
+                                </header>
+                                <ul>
+                                    <li>Tudo do SuperGrok</li>
+                                    <li>Compartilhamento colaborativo</li>
+                                    <li>Suíte avançada de ferramentas</li>
+                                    <li>Modelo de treinamento por padrão</li>
+                                </ul>
+                                <button class="plan-btn">Criar uma equipe</button>
+                            </article>
+                            <article class="business-card">
+                                <header>
+                                    <h3>Mais do que números</h3>
+                                </header>
+                                <ul>
+                                    <li>Gestão simplificada</li>
+                                    <li>Integrações com ferramentas</li>
+                                    <li>Governança e auditoria</li>
+                                    <li>Mais produtividade para times</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </section>
+                    <section class="plans-view" data-tab-panel="enterprise">
+                        <h2>Grok Business</h2>
+                        <p class="modal-subtitle">Amplie a inteligência da sua organização</p>
+                        <div class="business-grid">
+                            <article class="business-card">
+                                <header>
+                                    <h3>Let's Talk</h3>
+                                    <span>Entre em contato</span>
+                                </header>
+                                <ul>
+                                    <li>Usuários ilimitados</li>
+                                    <li>Logins únicos (SSO)</li>
+                                    <li>Controles de segurança (SCIM)</li>
+                                    <li>Relatórios personalizados</li>
+                                </ul>
+                                <button class="plan-btn">Entrar em contato</button>
+                            </article>
+                            <article class="business-card">
+                                <header>
+                                    <h3>Suporte dedicado</h3>
+                                </header>
+                                <ul>
+                                    <li>Acesso a especialistas</li>
+                                    <li>Treinamentos guiados</li>
+                                    <li>Canal de comunicação direto</li>
+                                    <li>Implantação assistida</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Toast Notifications -->
-    <div class="toast-container" id="toastContainer"></div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
