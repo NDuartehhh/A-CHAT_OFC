@@ -17,25 +17,25 @@
                     <input type="text" placeholder="Buscar Grok" aria-label="Buscar Grok">
                 </div>
 
-                <nav class="sidebar-nav">
+                <nav class="sidebar-nav" role="tablist" aria-label="Alternar seções principais">
                     <p class="sidebar-label">Menu</p>
-                    <button class="nav-item is-active" data-target="chat">
+                    <button class="nav-item is-active" data-target="chat" role="tab" id="tab-chat" aria-controls="view-chat" aria-selected="true" tabindex="0">
                         <span class="nav-icon"><i class="fa-solid fa-comments"></i></span>
                         <span>Bate-papo</span>
                     </button>
-                    <button class="nav-item" data-target="voice">
+                    <button class="nav-item" data-target="voice" role="tab" id="tab-voice" aria-controls="view-voice" aria-selected="false" tabindex="-1">
                         <span class="nav-icon"><i class="fa-solid fa-waveform-lines"></i></span>
                         <span>Voz</span>
                     </button>
-                    <button class="nav-item" data-target="image">
+                    <button class="nav-item" data-target="image" role="tab" id="tab-image" aria-controls="view-image" aria-selected="false" tabindex="-1">
                         <span class="nav-icon"><i class="fa-solid fa-image"></i></span>
                         <span>Imagem</span>
                     </button>
-                    <button class="nav-item" data-target="projects">
+                    <button class="nav-item" data-target="projects" role="tab" id="tab-projects" aria-controls="view-projects" aria-selected="false" tabindex="-1">
                         <span class="nav-icon"><i class="fa-solid fa-diagram-project"></i></span>
                         <span>Projetos</span>
                     </button>
-                    <button class="nav-item" data-target="history">
+                    <button class="nav-item" data-target="history" role="tab" id="tab-history" aria-controls="view-history" aria-selected="false" tabindex="-1">
                         <span class="nav-icon"><i class="fa-regular fa-clock"></i></span>
                         <span>Histórico</span>
                     </button>
@@ -87,7 +87,7 @@
                     </button>
                 </header>
 
-                <section class="view view-chat is-active" data-view="chat">
+                <section class="view view-chat is-active" data-view="chat" id="view-chat" role="tabpanel" aria-labelledby="tab-chat" aria-hidden="false">
                     <div class="grok-hero">
                         <div class="hero-stack">
                             <div class="hero-logo">
@@ -147,7 +147,7 @@
                     </div>
                 </section>
 
-                <section class="view view-voice" data-view="voice">
+                <section class="view view-voice" data-view="voice" id="view-voice" role="tabpanel" aria-labelledby="tab-voice" aria-hidden="true" hidden>
                     <div class="panel">
                         <div class="panel-header">
                             <h2>Converse com sua voz</h2>
@@ -163,7 +163,7 @@
                     </div>
                 </section>
 
-                <section class="view view-image" data-view="image">
+                <section class="view view-image" data-view="image" id="view-image" role="tabpanel" aria-labelledby="tab-image" aria-hidden="true" hidden>
                     <div class="panel">
                         <div class="panel-header">
                             <h2>Crie imagens com o Grok</h2>
@@ -178,7 +178,7 @@
                     </div>
                 </section>
 
-                <section class="view view-projects" data-view="projects">
+                <section class="view view-projects" data-view="projects" id="view-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true" hidden>
                     <div class="workspace">
                         <header class="workspace-header">
                             <h2>Projetos</h2>
@@ -193,16 +193,16 @@
                         <div class="workspace-body">
                             <aside class="workspace-nav">
                                 <p class="workspace-label">Ações</p>
-                                <button class="workspace-item is-active">Criar novo chat privado</button>
-                                <button class="workspace-item">Quadros compartilhados</button>
-                                <button class="workspace-item">Automatizações</button>
-                                <button class="workspace-item">Templates recentes</button>
+                                <button class="workspace-item is-active" aria-pressed="true">Criar novo chat privado</button>
+                                <button class="workspace-item" aria-pressed="false">Quadros compartilhados</button>
+                                <button class="workspace-item" aria-pressed="false">Automatizações</button>
+                                <button class="workspace-item" aria-pressed="false">Templates recentes</button>
                                 <p class="workspace-label">Hoje</p>
-                                <button class="workspace-item">ChatGPT Clone Development Guide</button>
-                                <button class="workspace-item">Respostas Diretas de Questões Variadas</button>
-                                <button class="workspace-item">Minimalist Green Logo for Natural Brand</button>
-                                <button class="workspace-item">Desenvolvimento Full-Stack: Fase Piloto</button>
-                                <button class="workspace-item">Geração de Imagem com Plataforma IA</button>
+                                <button class="workspace-item" aria-pressed="false">ChatGPT Clone Development Guide</button>
+                                <button class="workspace-item" aria-pressed="false">Respostas Diretas de Questões Variadas</button>
+                                <button class="workspace-item" aria-pressed="false">Minimalist Green Logo for Natural Brand</button>
+                                <button class="workspace-item" aria-pressed="false">Desenvolvimento Full-Stack: Fase Piloto</button>
+                                <button class="workspace-item" aria-pressed="false">Geração de Imagem com Plataforma IA</button>
                             </aside>
                             <div class="workspace-preview">
                                 <div class="preview-empty">
@@ -214,7 +214,7 @@
                     </div>
                 </section>
 
-                <section class="view view-history" data-view="history">
+                <section class="view view-history" data-view="history" id="view-history" role="tabpanel" aria-labelledby="tab-history" aria-hidden="true" hidden>
                     <div class="history-panel">
                         <header class="history-header">
                             <h2>Histórico</h2>
@@ -266,7 +266,7 @@
             </div>
         </main>
 
-        <div class="floating-menu mode-menu" role="menu" aria-hidden="true">
+        <div class="floating-menu mode-menu" role="menu" aria-hidden="true" hidden>
             <div class="menu-section">
                 <p class="menu-label">Selecione o modo</p>
                 <button class="menu-item" data-mode="auto">
@@ -322,7 +322,7 @@
             </div>
         </div>
 
-        <div class="floating-menu attach-menu" role="menu" aria-hidden="true">
+        <div class="floating-menu attach-menu" role="menu" aria-hidden="true" hidden>
             <div class="menu-section">
                 <button class="menu-item">
                     <div>
@@ -357,7 +357,7 @@
             </div>
         </div>
 
-        <div class="modal" id="modal-plans" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal" id="modal-plans" aria-hidden="true" role="dialog" aria-modal="true" hidden>
             <div class="modal-backdrop" data-close-modal></div>
             <div class="modal-content">
                 <header class="modal-header">
@@ -455,7 +455,7 @@
             </div>
         </div>
 
-        <div class="modal" id="modal-business" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal" id="modal-business" aria-hidden="true" role="dialog" aria-modal="true" hidden>
             <div class="modal-backdrop" data-close-modal></div>
             <div class="modal-content">
                 <header class="modal-header">
