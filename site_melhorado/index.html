@@ -3,536 +3,1126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grok Interface</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <title>Lucid Origin Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg-900: #05030f;
+            --bg-800: #0c0a1b;
+            --bg-750: #13112a;
+            --bg-700: #161432;
+            --bg-650: #1b1a3f;
+            --bg-overlay: rgba(12, 10, 27, 0.8);
+            --panel-border: rgba(255, 255, 255, 0.04);
+            --panel-border-strong: rgba(126, 120, 255, 0.35);
+            --primary: #8f6bff;
+            --primary-strong: #c77dff;
+            --primary-soft: rgba(143, 107, 255, 0.12);
+            --primary-gradient: linear-gradient(135deg, #a661ff, #7060ff 55%, #3d9fff);
+            --primary-gradient-soft: linear-gradient(135deg, rgba(166, 97, 255, 0.14), rgba(61, 159, 255, 0.08));
+            --accent-green: #3dffc6;
+            --accent-blue: #56b5ff;
+            --text-100: rgba(255, 255, 255, 0.92);
+            --text-300: rgba(255, 255, 255, 0.72);
+            --text-500: rgba(255, 255, 255, 0.45);
+            --danger: #ff5c8a;
+            --radius-lg: 18px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --shadow-strong: 0 24px 60px rgba(10, 7, 28, 0.55);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, rgba(95, 63, 255, 0.25), transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(56, 157, 255, 0.2), transparent 45%),
+                        var(--bg-900);
+            color: var(--text-100);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            padding: 24px;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .app-shell {
+            width: min(1350px, 100%);
+            background: rgba(5, 3, 15, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 26px;
+            backdrop-filter: blur(16px);
+            display: grid;
+            grid-template-columns: 310px 1fr;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+
+        aside.control-panel {
+            background: linear-gradient(180deg, rgba(20, 16, 51, 0.88), rgba(9, 9, 25, 0.95));
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+        }
+
+        .panel-scroll {
+            padding: 28px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .panel-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .panel-scroll::-webkit-scrollbar-thumb {
+            background: rgba(143, 107, 255, 0.35);
+            border-radius: 999px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            border-radius: var(--radius-lg);
+            background: var(--primary-gradient-soft);
+            border: 1px solid rgba(142, 112, 255, 0.32);
+            box-shadow: 0 16px 30px rgba(82, 63, 182, 0.18);
+        }
+
+        .panel-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--primary-gradient);
+            display: grid;
+            place-items: center;
+            color: #0c0a1b;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 12px 28px rgba(125, 98, 255, 0.45);
+        }
+
+        .brand-text h1 {
+            font-size: 17px;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .brand-text span {
+            font-size: 13px;
+            color: var(--text-300);
+        }
+
+        .panel-upgrade {
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-100);
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .panel-section {
+            background: rgba(14, 12, 32, 0.95);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .panel-section.highlight {
+            border: 1px solid var(--panel-border-strong);
+            background: linear-gradient(180deg, rgba(30, 19, 75, 0.6), rgba(11, 9, 31, 0.92));
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-300);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+        }
+
+        .selection-button {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(143, 107, 255, 0.35);
+            background: radial-gradient(circle at top, rgba(143, 107, 255, 0.25), rgba(14, 12, 32, 0.85));
+            color: var(--text-100);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .selection-button small {
+            color: var(--text-500);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+        }
+
+        .selection-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(113, 91, 255, 0.24);
+        }
+
+        .toggle-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 10px;
+            padding: 6px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(9, 7, 24, 0.9);
+        }
+
+        .toggle {
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-300);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .toggle.active {
+            background: var(--primary-gradient);
+            color: #070517;
+            box-shadow: 0 12px 24px rgba(93, 72, 230, 0.45);
+        }
+
+        .chip-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .chip {
+            background: rgba(16, 13, 41, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .chip span {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-500);
+            letter-spacing: 0.1em;
+        }
+
+        .chip strong {
+            font-size: 15px;
+            color: var(--text-100);
+        }
+
+        .chip.active {
+            border-color: rgba(132, 113, 255, 0.55);
+            background: rgba(132, 113, 255, 0.12);
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .input-control {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(14, 12, 32, 0.85);
+            border-radius: 12px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .input-control label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-500);
+            letter-spacing: 0.12em;
+        }
+
+        .input-control input {
+            background: transparent;
+            border: none;
+            color: var(--text-100);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            outline: none;
+            text-align: center;
+        }
+
+        .slider {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        .range-display {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(12, 10, 29, 0.75);
+        }
+
+        .switch button {
+            width: 56px;
+            height: 30px;
+            border-radius: 999px;
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .switch button::after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.2s ease;
+        }
+
+        .switch button.active {
+            background: var(--primary-gradient);
+        }
+
+        .switch button.active::after {
+            transform: translateX(26px);
+            background: #070517;
+        }
+
+        main.workspace {
+            background: linear-gradient(160deg, rgba(10, 7, 24, 0.82), rgba(6, 5, 18, 0.92));
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .workspace-header {
+            padding: 22px 28px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .workspace-top-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .mode-toggle {
+            display: inline-flex;
+            background: rgba(11, 9, 28, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 999px;
+            padding: 6px;
+            gap: 6px;
+        }
+
+        .mode-toggle button {
+            border: none;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            background: transparent;
+            color: var(--text-300);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .mode-toggle button.active {
+            background: var(--primary-gradient);
+            color: #060414;
+            box-shadow: 0 12px 24px rgba(90, 63, 224, 0.35);
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .queue-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(14, 12, 32, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 999px;
+        }
+
+        .queue-indicator span:first-child {
+            display: inline-flex;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 12px rgba(61, 255, 198, 0.65);
+        }
+
+        .queue-indicator strong {
+            letter-spacing: 0.08em;
+            font-size: 12px;
+        }
+
+        .upgrade-btn {
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ff9f7d, #ff5b91);
+            border: none;
+            color: #070517;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(255, 91, 145, 0.4);
+        }
+
+        .prompt-bar {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .prompt-input {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(9, 7, 24, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            box-shadow: inset 0 0 0 1px rgba(111, 92, 255, 0.08);
+        }
+
+        .prompt-input i {
+            color: var(--text-500);
+            font-size: 16px;
+        }
+
+        .prompt-input input {
+            background: transparent;
+            border: none;
+            color: var(--text-100);
+            font-size: 15px;
+            flex: 1;
+            outline: none;
+        }
+
+        .prompt-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .prompt-actions button {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(19, 16, 48, 0.85);
+            color: var(--text-300);
+            cursor: pointer;
+        }
+
+        .gallery {
+            padding: 24px 28px 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 22px;
+            overflow-y: auto;
+        }
+
+        .gallery-card {
+            background: rgba(12, 10, 28, 0.82);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 16px 30px rgba(7, 5, 21, 0.42);
+            position: relative;
+        }
+
+        .gallery-card figure {
+            position: relative;
+            margin: 0;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-card figcaption {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(5, 3, 15, 0.55);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 18px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-body h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .card-body p {
+            margin: 0;
+            color: var(--text-500);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .card-tags span {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(143, 107, 255, 0.18);
+            border: 1px solid rgba(143, 107, 255, 0.35);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            color: var(--primary-strong);
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .preview-button {
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: var(--primary-gradient);
+            border: none;
+            color: #070517;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(93, 72, 230, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .preview-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(93, 72, 230, 0.5);
+        }
+
+        .preview-overlay {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: rgba(5, 3, 15, 0.88);
+            backdrop-filter: blur(18px);
+            padding: 32px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .preview-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .preview-dialog {
+            background: rgba(16, 13, 41, 0.95);
+            border-radius: 26px;
+            border: 1px solid rgba(143, 107, 255, 0.35);
+            box-shadow: 0 30px 70px rgba(8, 6, 25, 0.7);
+            max-width: 820px;
+            width: min(90vw, 820px);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 260px;
+        }
+
+        .preview-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .preview-details {
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            background: linear-gradient(180deg, rgba(20, 17, 55, 0.95), rgba(10, 9, 32, 0.92));
+        }
+
+        .preview-details h3 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--text-100);
+        }
+
+        .preview-details p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-300);
+        }
+
+        .preview-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preview-meta span {
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-500);
+        }
+
+        .preview-close {
+            margin-top: auto;
+            align-self: flex-end;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-100);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .preview-close:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        @media (max-width: 1180px) {
+            .preview-dialog {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-details {
+                padding: 22px;
+            }
+        }
+
+        footer.panel-footer {
+            margin-top: auto;
+            padding: 22px 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(9, 7, 22, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            color: #060414;
+        }
+
+        .profile-info span {
+            display: block;
+            font-size: 13px;
+        }
+
+        .profile-info small {
+            color: var(--text-500);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+        }
+
+        .settings {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(18, 16, 45, 0.85);
+            color: var(--text-300);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1160px) {
+            body {
+                padding: 16px;
+            }
+            .app-shell {
+                grid-template-columns: 280px 1fr;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .app-shell {
+                grid-template-columns: 1fr;
+            }
+            aside.control-panel {
+                display: none;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .preview-overlay {
+                padding: 18px;
+            }
+
+            .preview-details {
+                gap: 14px;
+            }
+
+            .preview-details h3 {
+                font-size: 19px;
+            }
+
+            .workspace-header {
+                padding: 18px 18px 14px;
+            }
+            .workspace-top-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .top-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .gallery {
+                padding: 18px;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="grok-app">
-        <aside class="grok-sidebar">
-            <div class="sidebar-content">
-                <div class="sidebar-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar Grok" aria-label="Buscar Grok">
+    <div class="app-shell">
+        <aside class="control-panel">
+            <div class="panel-scroll">
+                <div class="panel-header">
+                    <div class="brand">
+                        <div class="brand-icon">LO</div>
+                        <div class="brand-text">
+                            <h1>Lucid Origin Studio</h1>
+                            <span>Gerador Imersivo</span>
+                        </div>
+                    </div>
+                    <button class="panel-upgrade">Prime Access</button>
                 </div>
 
-                <nav class="sidebar-nav" role="tablist" aria-label="Alternar seções principais">
-                    <p class="sidebar-label">Menu</p>
-                    <button class="nav-item is-active" data-target="chat" role="tab" id="tab-chat" aria-controls="view-chat" aria-selected="true" tabindex="0">
-                        <span class="nav-icon"><i class="fa-solid fa-comments"></i></span>
-                        <span>Bate-papo</span>
+                <section class="panel-section highlight">
+                    <div class="section-title">Model</div>
+                    <button class="selection-button" type="button">
+                        Lucid Origin <small>GEN V · V5.1</small>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </button>
-                    <button class="nav-item" data-target="voice" role="tab" id="tab-voice" aria-controls="view-voice" aria-selected="false" tabindex="-1">
-                        <span class="nav-icon"><i class="fa-solid fa-waveform-lines"></i></span>
-                        <span>Voz</span>
-                    </button>
-                    <button class="nav-item" data-target="image" role="tab" id="tab-image" aria-controls="view-image" aria-selected="false" tabindex="-1">
-                        <span class="nav-icon"><i class="fa-solid fa-image"></i></span>
-                        <span>Imagem</span>
-                    </button>
-                    <button class="nav-item" data-target="projects" role="tab" id="tab-projects" aria-controls="view-projects" aria-selected="false" tabindex="-1">
-                        <span class="nav-icon"><i class="fa-solid fa-diagram-project"></i></span>
-                        <span>Projetos</span>
-                    </button>
-                    <button class="nav-item" data-target="history" role="tab" id="tab-history" aria-controls="view-history" aria-selected="false" tabindex="-1">
-                        <span class="nav-icon"><i class="fa-regular fa-clock"></i></span>
-                        <span>Histórico</span>
-                    </button>
-                </nav>
+                </section>
 
-                <div class="sidebar-history">
-                    <p class="sidebar-label">Hoje</p>
-                    <button class="history-item">
-                        <span class="history-icon"><i class="fa-regular fa-message"></i></span>
-                        <span>ChatGPT Clone Development</span>
-                    </button>
-                    <button class="history-item">
-                        <span class="history-icon"><i class="fa-regular fa-lightbulb"></i></span>
-                        <span>Respostas Diretas de Questões</span>
-                    </button>
-                    <button class="history-item">
-                        <span class="history-icon"><i class="fa-regular fa-compass"></i></span>
-                        <span>Minimalist Green Logo for</span>
-                    </button>
-                    <button class="history-item">
-                        <span class="history-icon"><i class="fa-regular fa-object-group"></i></span>
-                        <span>Logo Design: Natural Product</span>
-                    </button>
-                    <button class="history-item">
-                        <span class="history-icon"><i class="fa-solid fa-brain"></i></span>
-                        <span>Desenvolvimento Full-Stack</span>
-                    </button>
-                </div>
+                <section class="panel-section">
+                    <div class="section-title">Prompt Enhancer</div>
+                    <div class="toggle-group" data-toggle-group="enhancer">
+                        <button class="toggle active" type="button">Auto</button>
+                        <button class="toggle" type="button">Lite</button>
+                        <button class="toggle" type="button">Off</button>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Style</div>
+                    <div class="toggle-group" data-toggle-group="style">
+                        <button class="toggle active" type="button">Cinematic</button>
+                        <button class="toggle" type="button">Painterly</button>
+                        <button class="toggle" type="button">Hyperreal</button>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Mode</div>
+                    <div class="toggle-group" data-toggle-group="mode">
+                        <button class="toggle active" type="button">Image</button>
+                        <button class="toggle" type="button">Video</button>
+                        <button class="toggle" type="button">Flow State</button>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Image Dimensions</div>
+                    <div class="chip-group" data-toggle-group="dimensions">
+                        <button class="chip active" type="button">
+                            <span>Quadrado</span>
+                            <strong>1 : 1</strong>
+                        </button>
+                        <button class="chip" type="button">
+                            <span>Vertical</span>
+                            <strong>2 : 3</strong>
+                        </button>
+                        <button class="chip" type="button">
+                            <span>Vertical</span>
+                            <strong>9 : 16</strong>
+                        </button>
+                        <button class="chip" type="button">
+                            <span>Horizontal</span>
+                            <strong>3 : 2</strong>
+                        </button>
+                        <button class="chip" type="button">
+                            <span>Horizontal</span>
+                            <strong>16 : 9</strong>
+                        </button>
+                        <button class="chip" type="button">
+                            <span>Ultra</span>
+                            <strong>21 : 9</strong>
+                        </button>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-control">
+                            <label>Largura</label>
+                            <input type="number" value="1024" min="256" step="16">
+                        </div>
+                        <div class="input-control">
+                            <label>Altura</label>
+                            <input type="number" value="1024" min="256" step="16">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Número de imagens</div>
+                    <input type="range" min="1" max="6" value="4" class="slider" id="image-count">
+                    <div class="range-display"><span id="image-count-display">4</span> imagens</div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Private Mode</div>
+                    <div class="switch">
+                        <span>Mantém suas criações invisíveis ao feed público.</span>
+                        <button type="button" id="private-mode" aria-pressed="true" class="active"></button>
+                    </div>
+                </section>
+
+                <section class="panel-section">
+                    <div class="section-title">Advanced Settings</div>
+                    <div class="toggle-group" data-toggle-group="advanced">
+                        <button class="toggle active" type="button">Prompt Weight</button>
+                        <button class="toggle" type="button">Seed Lock</button>
+                        <button class="toggle" type="button">Lighting FX</button>
+                    </div>
+                </section>
             </div>
 
-            <footer class="sidebar-footer">
-                <div class="user-avatar">N</div>
-                <div class="user-info">
-                    <span class="user-name">Nicolas Augusto</span>
-                    <span class="user-plan">Plano Pro</span>
+            <footer class="panel-footer">
+                <div class="profile">
+                    <div class="avatar">NA</div>
+                    <div class="profile-info">
+                        <span>Nicolas Andrade</span>
+                        <small>Creative Director</small>
+                    </div>
                 </div>
-                <button class="settings-btn" aria-label="Abrir configurações">
-                    <i class="fa-solid fa-ellipsis"></i>
-                </button>
+                <button class="settings" type="button"><i class="fa-solid fa-ellipsis"></i></button>
             </footer>
         </aside>
 
-        <main class="grok-main">
-            <div class="main-inner">
-                <header class="main-header">
-                    <button class="header-chip">
-                        <i class="fa-solid fa-lock"></i>
-                        Privado
-                    </button>
-                </header>
-
-                <section class="view view-chat is-active" data-view="chat" id="view-chat" role="tabpanel" aria-labelledby="tab-chat" aria-hidden="false">
-                    <div class="grok-hero">
-                        <div class="hero-stack">
-                            <div class="hero-logo">
-                                <svg viewBox="0 0 64 64" aria-hidden="true">
-                                    <path d="M54 19.5C54 31 44.6 40.4 33.1 40.4c-3.2 0-6.1-.7-8.6-1.9l4.9-8c1 .4 2.2.6 3.4.6 5 0 9-4.1 9-9.2 0-5.3-4.1-9.4-9.3-9.4-7.3 0-12.6 6.1-12.6 14.3v3.6l-9.9 3.8c-.5-2-1-4.2-1-6.7C9 13.1 19 2 32.5 2 46.4 2 54 12.3 54 19.5z"/>
-                                    <path d="M10 44.4C10 33 19.5 23.6 31 23.6c3.2 0 6.1.7 8.6 1.9l-4.9 8c-1-.4-2.2-.6-3.4-.6-5 0-9 4.1-9 9.2 0 5.3 4.1 9.4 9.3 9.4 7.3 0 12.6-6.1 12.6-14.3v-3.6l9.9-3.8c.5 2 1 4.2 1 6.7C55 50.9 45 62 31.5 62 17.6 62 10 51.7 10 44.4z"/>
-                                </svg>
-                                <span>Grok</span>
+        <main class="workspace">
+            <header class="workspace-header">
+                <div class="workspace-top-line">
+                    <div class="mode-toggle" data-toggle-group="workspace">
+                        <button class="active" type="button">Image</button>
+                        <button type="button">Video</button>
+                        <button type="button">Flow State</button>
+                    </div>
+                    <div class="top-actions">
+                        <div class="queue-indicator">
+                            <span></span>
+                            <div>
+                                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-500);">Queue</div>
+                                <strong>5 / 14</strong>
                             </div>
-                            <p class="hero-subtitle">O que você quer saber?</p>
+                        </div>
+                        <button class="upgrade-btn" type="button">Upgrade</button>
+                    </div>
+                </div>
 
-                            <div class="query-wrapper">
-                                <div class="query-input">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="O que você quer saber?" aria-label="O que você quer saber?">
-                                    <button class="query-tool" aria-label="Adicionar conteúdo">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                    <button class="query-mic" aria-label="Iniciar pesquisa por voz">
-                                        <i class="fa-solid fa-microphone"></i>
-                                    </button>
-                                </div>
-                                <button class="query-mode" aria-haspopup="true" aria-expanded="false">
-                                    <span>Rápido</span>
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </button>
-                            </div>
-
-                            <div class="quick-actions">
-                                <button class="action-chip" data-action="deepsearch">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    DeepSearch
-                                </button>
-                                <button class="action-chip" data-action="image">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                                    Create Image
-                                </button>
-                                <button class="action-chip" data-action="news">
-                                    <i class="fa-solid fa-newspaper"></i>
-                                    Notícias mais recentes
-                                </button>
-                                <button class="action-chip" data-action="voice">
-                                    <i class="fa-solid fa-waveform-lines"></i>
-                                    Voz
-                                </button>
-                            </div>
-
-                            <div class="promo-card">
-                                <div class="promo-content">
-                                    <div class="promo-badge">SuperGrok</div>
-                                    <h3>Desbloqueie recursos avançados</h3>
-                                    <p>Descubra respostas mais rápidas e profundas com o plano Pro.</p>
-                                </div>
-                                <button class="promo-action" data-open-modal="plans">Atualizar</button>
-                            </div>
+                <div class="prompt-bar">
+                    <div class="prompt-input">
+                        <i class="fa-solid fa-pen"></i>
+                        <input type="text" placeholder="Type a prompt...">
+                        <div class="prompt-actions">
+                            <button type="button" aria-label="Gerar variações"><i class="fa-solid fa-shuffle"></i></button>
+                            <button type="button" aria-label="Favoritos"><i class="fa-regular fa-star"></i></button>
+                            <button type="button" aria-label="Biblioteca"><i class="fa-solid fa-folder"></i></button>
                         </div>
                     </div>
-                </section>
+                </div>
+            </header>
 
-                <section class="view view-voice" data-view="voice" id="view-voice" role="tabpanel" aria-labelledby="tab-voice" aria-hidden="true" hidden>
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h2>Converse com sua voz</h2>
-                            <p>Use o Grok para responder em tempo real com clareza e naturalidade.</p>
+            <section class="gallery" aria-label="Resultado de imagens">
+                <article class="gallery-card" data-preview-title="Stitch Minecraft" data-preview-description="Ultra-detailed Pixar style render of stitch in a magical workshop, cinematic rim lights, volumetric fog." data-preview-tags="#3D · #Pixar · #BlueAlien">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80" alt="Boneco estilizado azul sobre fundo violeta">
+                        <figcaption>Lucid Origin</figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h3>Stitch Minecraft</h3>
+                        <p>Ultra-detailed Pixar style render of stitch in a magical workshop, cinematic rim lights, volumetric fog.</p>
+                        <div class="card-tags">
+                            <span>#3D</span>
+                            <span>#Pixar</span>
+                            <span>#BlueAlien</span>
                         </div>
-                        <div class="voice-display">
-                            <div class="voice-glow"></div>
-                            <div class="voice-controls">
-                                <button class="voice-btn is-primary"><i class="fa-solid fa-microphone"></i> Começar sessão</button>
-                                <button class="voice-btn"><i class="fa-solid fa-waveform"></i> Ver transcrição</button>
-                            </div>
+                        <div class="card-actions">
+                            <button type="button" class="preview-button">Pré-visualizar</button>
                         </div>
                     </div>
-                </section>
+                </article>
 
-                <section class="view view-image" data-view="image" id="view-image" role="tabpanel" aria-labelledby="tab-image" aria-hidden="true" hidden>
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h2>Crie imagens com o Grok</h2>
-                            <p>Transforme descrições em composições visuais usando o Grok Vision.</p>
+                <article class="gallery-card" data-preview-title="Clay Studio Companion" data-preview-description="Cute handcrafted alien figurine illuminated with studio lighting, shallow depth of field, cinematic shot." data-preview-tags="#Clay · #StudioLight · #Character">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1601758125946-6ec2e9dd2b26?auto=format&fit=crop&w=1200&q=80" alt="Personagem azul sorrindo">
+                        <figcaption>Lucid Origin</figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h3>Clay Studio Companion</h3>
+                        <p>Cute handcrafted alien figurine illuminated with studio lighting, shallow depth of field, cinematic shot.</p>
+                        <div class="card-tags">
+                            <span>#Clay</span>
+                            <span>#StudioLight</span>
+                            <span>#Character</span>
                         </div>
-                        <div class="image-grid">
-                            <div class="image-card">Explorar estilos</div>
-                            <div class="image-card">Carregar referência</div>
-                            <div class="image-card">Histórico de renders</div>
-                            <div class="image-card">Modelos disponíveis</div>
+                        <div class="card-actions">
+                            <button type="button" class="preview-button">Pré-visualizar</button>
                         </div>
                     </div>
-                </section>
+                </article>
 
-                <section class="view view-projects" data-view="projects" id="view-projects" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true" hidden>
-                    <div class="workspace">
-                        <header class="workspace-header">
-                            <h2>Projetos</h2>
-                            <div class="workspace-actions">
-                                <div class="input-pill">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" placeholder="Pesquisar..." aria-label="Pesquisar projetos">
-                                </div>
-                                <button class="pill-action" data-open-modal="business">Criar equipe</button>
-                            </div>
-                        </header>
-                        <div class="workspace-body">
-                            <aside class="workspace-nav">
-                                <p class="workspace-label">Ações</p>
-                                <button class="workspace-item is-active" aria-pressed="true">Criar novo chat privado</button>
-                                <button class="workspace-item" aria-pressed="false">Quadros compartilhados</button>
-                                <button class="workspace-item" aria-pressed="false">Automatizações</button>
-                                <button class="workspace-item" aria-pressed="false">Templates recentes</button>
-                                <p class="workspace-label">Hoje</p>
-                                <button class="workspace-item" aria-pressed="false">ChatGPT Clone Development Guide</button>
-                                <button class="workspace-item" aria-pressed="false">Respostas Diretas de Questões Variadas</button>
-                                <button class="workspace-item" aria-pressed="false">Minimalist Green Logo for Natural Brand</button>
-                                <button class="workspace-item" aria-pressed="false">Desenvolvimento Full-Stack: Fase Piloto</button>
-                                <button class="workspace-item" aria-pressed="false">Geração de Imagem com Plataforma IA</button>
-                            </aside>
-                            <div class="workspace-preview">
-                                <div class="preview-empty">
-                                    <h3>Selecione uma conversa para pré-visualizar</h3>
-                                    <p>Escolha um projeto à esquerda para ver seus detalhes e retomar de onde parou.</p>
-                                </div>
-                            </div>
+                <article class="gallery-card" data-preview-title="Playful Guardian" data-preview-description="Glowing sci-fi plush creature, cinematic lighting, elegant bokeh background, smiling expression." data-preview-tags="#SciFi · #Toy · #Bokeh">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?auto=format&fit=crop&w=1200&q=80" alt="Personagem azul com olhos grandes">
+                        <figcaption>Lucid Origin</figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h3>Playful Guardian</h3>
+                        <p>Glowing sci-fi plush creature, cinematic lighting, elegant bokeh background, smiling expression.</p>
+                        <div class="card-tags">
+                            <span>#SciFi</span>
+                            <span>#Toy</span>
+                            <span>#Bokeh</span>
+                        </div>
+                        <div class="card-actions">
+                            <button type="button" class="preview-button">Pré-visualizar</button>
                         </div>
                     </div>
-                </section>
+                </article>
 
-                <section class="view view-history" data-view="history" id="view-history" role="tabpanel" aria-labelledby="tab-history" aria-hidden="true" hidden>
-                    <div class="history-panel">
-                        <header class="history-header">
-                            <h2>Histórico</h2>
-                            <div class="input-pill">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" placeholder="Pesquisar" aria-label="Pesquisar no histórico">
-                            </div>
-                        </header>
-                        <div class="history-list">
-                            <button class="history-entry">
-                                <span class="entry-title">ChatGPT Clone Development Guide</span>
-                                <span class="entry-time">Há 2 horas</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Respostas Diretas de Questões Variadas</span>
-                                <span class="entry-time">Há 2 horas</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Minimalist Green Logo for Natural Brand</span>
-                                <span class="entry-time">18 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Desenvolvimento Full-Stack: Fase Piloto</span>
-                                <span class="entry-time">16 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Documentação Técnica para Desenvolvimento</span>
-                                <span class="entry-time">14 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Geração de Imagem com Plataforma IA</span>
-                                <span class="entry-time">14 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Computador preparado com GrokOS</span>
-                                <span class="entry-time">13 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Doutor preocupado com Virago e Maçã</span>
-                                <span class="entry-time">12 de out.</span>
-                            </button>
-                            <button class="history-entry">
-                                <span class="entry-title">Imagem Editorial: Vintage, Grunge, Estilo Noir</span>
-                                <span class="entry-time">9 de out.</span>
-                            </button>
+                <article class="gallery-card" data-preview-title="Neon Workshop Buddy" data-preview-description="Miniature character crafted in polymer clay, neon reflections, dramatic cinematic shadows, 8k render." data-preview-tags="#Neon · #Craft · #Render">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1582719478566-2c8b7cf1a9a1?auto=format&fit=crop&w=1200&q=80" alt="Outro personagem azul estilizado">
+                        <figcaption>Lucid Origin</figcaption>
+                    </figure>
+                    <div class="card-body">
+                        <h3>Neon Workshop Buddy</h3>
+                        <p>Miniature character crafted in polymer clay, neon reflections, dramatic cinematic shadows, 8k render.</p>
+                        <div class="card-tags">
+                            <span>#Neon</span>
+                            <span>#Craft</span>
+                            <span>#Render</span>
+                        </div>
+                        <div class="card-actions">
+                            <button type="button" class="preview-button">Pré-visualizar</button>
                         </div>
                     </div>
-                </section>
-            </div>
+                </article>
+            </section>
         </main>
+    </div>
 
-        <div class="floating-menu mode-menu" role="menu" aria-hidden="true" hidden>
-            <div class="menu-section">
-                <p class="menu-label">Selecione o modo</p>
-                <button class="menu-item" data-mode="auto">
-                    <div>
-                        <span class="menu-title">Automático</span>
-                        <span class="menu-subtitle">Escolha o melhor modo para você</span>
-                    </div>
-                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
-                </button>
-                <button class="menu-item is-active" data-mode="fast">
-                    <div>
-                        <span class="menu-title">Rápido</span>
-                        <span class="menu-subtitle">Respostas rápidas</span>
-                    </div>
-                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
-                </button>
-                <button class="menu-item" data-mode="expert">
-                    <div>
-                        <span class="menu-title">Especialista</span>
-                        <span class="menu-subtitle">Equipe de especialistas</span>
-                    </div>
-                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
-                </button>
-                <button class="menu-item" data-mode="grokfast">
-                    <div>
-                        <span class="menu-title">Grok-4 Fast <span class="badge">Beta</span></span>
-                        <span class="menu-subtitle">Heavy</span>
-                    </div>
-                    <span class="menu-check"><i class="fa-solid fa-check"></i></span>
-                </button>
+    <div class="preview-overlay" id="preview-overlay" aria-hidden="true">
+        <div class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+            <div class="preview-media">
+                <img src="" alt="" id="preview-image">
             </div>
-            <div class="menu-section">
-                <button class="menu-item" data-open-modal="plans">
-                    <div>
-                        <span class="menu-title">SuperGrok</span>
-                        <span class="menu-subtitle">Desbloquear recursos estendidos</span>
-                    </div>
-                    <span class="menu-link">Atualizar</span>
-                </button>
-                <button class="menu-item" data-mode="custom">
-                    <div>
-                        <span class="menu-title">Instruções personalizadas</span>
-                        <span class="menu-subtitle">Defina respostas sob medida</span>
-                    </div>
-                    <span class="menu-link">Personalizar</span>
-                </button>
-                <button class="menu-item" data-mode="models">
-                    <div>
-                        <span class="menu-title">Modelos</span>
-                        <span class="menu-subtitle">Automático</span>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <div class="floating-menu attach-menu" role="menu" aria-hidden="true" hidden>
-            <div class="menu-section">
-                <button class="menu-item">
-                    <div>
-                        <span class="menu-title">Carregar um arquivo</span>
-                        <span class="menu-subtitle">Anexe documentos diretamente</span>
-                    </div>
-                </button>
-                <button class="menu-item">
-                    <div>
-                        <span class="menu-title">Adicionar conteúdo de texto</span>
-                        <span class="menu-subtitle">Cole ou digite um texto longo</span>
-                    </div>
-                </button>
-                <button class="menu-item">
-                    <div>
-                        <span class="menu-title">Conecte o Google Drive</span>
-                        <span class="menu-subtitle">Importe documentos do Drive</span>
-                    </div>
-                </button>
-                <button class="menu-item">
-                    <div>
-                        <span class="menu-title">Conectar Microsoft OneDrive</span>
-                        <span class="menu-subtitle">Integre com seus arquivos</span>
-                    </div>
-                </button>
-                <button class="menu-item">
-                    <div>
-                        <span class="menu-title">Recentes</span>
-                        <span class="menu-subtitle">Veja os últimos uploads</span>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <div class="modal" id="modal-plans" aria-hidden="true" role="dialog" aria-modal="true" hidden>
-            <div class="modal-backdrop" data-close-modal></div>
-            <div class="modal-content">
-                <header class="modal-header">
-                    <div class="modal-tabs" role="tablist">
-                        <button class="modal-tab is-active" data-tab="individual" role="tab" aria-selected="true">Individual</button>
-                        <button class="modal-tab" data-tab="business" role="tab" aria-selected="false">Empresa</button>
-                    </div>
-                    <button class="modal-close" data-close-modal aria-label="Fechar">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </header>
-                <div class="modal-body">
-                    <section class="plans-view is-active" data-tab-panel="individual">
-                        <h2>SuperGrok</h2>
-                        <p class="modal-subtitle">Apresentando o Grok-4, o modelo de IA mais poderoso</p>
-                        <div class="plans-grid">
-                            <article class="plan-card">
-                                <header>
-                                    <div class="plan-tag">Free</div>
-                                    <h3>Plano atual</h3>
-                                </header>
-                                <ul>
-                                    <li>Acesso ilimitado ao Grok 3</li>
-                                    <li>Modo de imagem Aurora</li>
-                                    <li>Respostas em voz</li>
-                                    <li>Histórico sincronizado</li>
-                                </ul>
-                                <button class="plan-btn" disabled>Ativo</button>
-                            </article>
-                            <article class="plan-card highlight">
-                                <header>
-                                    <div class="plan-tag">SuperGrok</div>
-                                    <h3>Atualize para SuperGrok</h3>
-                                    <span class="plan-price">$30,00<span>/mês</span></span>
-                                </header>
-                                <ul>
-                                    <li>Maior acesso ao Grok 4</li>
-                                    <li>Substituir e dividir tarefas</li>
-                                    <li>Modelos de imagem avançados</li>
-                                    <li>Acesso prioritário a novos recursos</li>
-                                </ul>
-                                <button class="plan-btn" data-open-modal="business">Criar uma equipe</button>
-                            </article>
-                            <article class="plan-card">
-                                <header>
-                                    <div class="plan-tag">SuperGrok Heavy</div>
-                                    <h3>Heavy</h3>
-                                    <span class="plan-price">$300,00<span>/mês</span></span>
-                                </header>
-                                <ul>
-                                    <li>O melhor para cargas intensas</li>
-                                    <li>Equipe dedicada de especialistas</li>
-                                    <li>Conectores avançados</li>
-                                    <li>Companheiros de telefone via Valet</li>
-                                </ul>
-                                <button class="plan-btn">Atualizar</button>
-                                <p class="plan-note">Economize com cobrança anual</p>
-                            </article>
-                        </div>
-                    </section>
-                    <section class="plans-view" data-tab-panel="business">
-                        <h2>SuperGrok</h2>
-                        <p class="modal-subtitle">Amplie a inteligência da sua organização</p>
-                        <div class="plans-grid">
-                            <article class="plan-card highlight">
-                                <header>
-                                    <div class="plan-tag">Equipe</div>
-                                    <h3>Grok Business</h3>
-                                    <span class="plan-price">$30,00<span>/assento</span></span>
-                                </header>
-                                <ul>
-                                    <li>Tudo do SuperGrok</li>
-                                    <li>Compartilhamento colaborativo</li>
-                                    <li>Suíte avançada de ferramentas</li>
-                                    <li>Suporte dedicado</li>
-                                </ul>
-                                <button class="plan-btn" data-open-modal="business">Criar uma equipe</button>
-                            </article>
-                            <article class="plan-card">
-                                <header>
-                                    <div class="plan-tag">Empresarial</div>
-                                    <h3>Let's Talk</h3>
-                                </header>
-                                <ul>
-                                    <li>Usuários ilimitados</li>
-                                    <li>Logins únicos (SSO)</li>
-                                    <li>Controles de segurança (SCIM)</li>
-                                    <li>Treinamento e suporte prioritário</li>
-                                </ul>
-                                <button class="plan-btn">Entre em contato</button>
-                            </article>
-                        </div>
-                    </section>
+            <div class="preview-details">
+                <div class="preview-meta">
+                    <span id="preview-tags"></span>
+                    <span>Lucid Origin Studio</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="modal" id="modal-business" aria-hidden="true" role="dialog" aria-modal="true" hidden>
-            <div class="modal-backdrop" data-close-modal></div>
-            <div class="modal-content">
-                <header class="modal-header">
-                    <div class="modal-tabs" role="tablist">
-                        <button class="modal-tab is-active" data-tab="team" role="tab" aria-selected="true">Individual</button>
-                        <button class="modal-tab" data-tab="enterprise" role="tab" aria-selected="false">Empresa</button>
-                    </div>
-                    <button class="modal-close" data-close-modal aria-label="Fechar">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </header>
-                <div class="modal-body">
-                    <section class="plans-view is-active" data-tab-panel="team">
-                        <h2>Grok Business</h2>
-                        <p class="modal-subtitle">Desperte o gênio coletivo</p>
-                        <div class="business-grid">
-                            <article class="business-card">
-                                <header>
-                                    <h3>$30,00</h3>
-                                    <span>/assento</span>
-                                </header>
-                                <ul>
-                                    <li>Tudo do SuperGrok</li>
-                                    <li>Compartilhamento colaborativo</li>
-                                    <li>Suíte avançada de ferramentas</li>
-                                    <li>Modelo de treinamento por padrão</li>
-                                </ul>
-                                <button class="plan-btn">Criar uma equipe</button>
-                            </article>
-                            <article class="business-card">
-                                <header>
-                                    <h3>Mais do que números</h3>
-                                </header>
-                                <ul>
-                                    <li>Gestão simplificada</li>
-                                    <li>Integrações com ferramentas</li>
-                                    <li>Governança e auditoria</li>
-                                    <li>Mais produtividade para times</li>
-                                </ul>
-                            </article>
-                        </div>
-                    </section>
-                    <section class="plans-view" data-tab-panel="enterprise">
-                        <h2>Grok Business</h2>
-                        <p class="modal-subtitle">Amplie a inteligência da sua organização</p>
-                        <div class="business-grid">
-                            <article class="business-card">
-                                <header>
-                                    <h3>Let's Talk</h3>
-                                    <span>Entre em contato</span>
-                                </header>
-                                <ul>
-                                    <li>Usuários ilimitados</li>
-                                    <li>Logins únicos (SSO)</li>
-                                    <li>Controles de segurança (SCIM)</li>
-                                    <li>Relatórios personalizados</li>
-                                </ul>
-                                <button class="plan-btn">Entrar em contato</button>
-                            </article>
-                            <article class="business-card">
-                                <header>
-                                    <h3>Suporte dedicado</h3>
-                                </header>
-                                <ul>
-                                    <li>Acesso a especialistas</li>
-                                    <li>Treinamentos guiados</li>
-                                    <li>Canal de comunicação direto</li>
-                                    <li>Implantação assistida</li>
-                                </ul>
-                            </article>
-                        </div>
-                    </section>
-                </div>
+                <h3 id="preview-title"></h3>
+                <p id="preview-description"></p>
+                <button type="button" class="preview-close" id="preview-close">Fechar</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('[data-toggle-group]').forEach(group => {
+            group.addEventListener('click', event => {
+                const target = event.target.closest('.toggle, .chip, button');
+                if (!target || target.disabled) return;
+                const buttons = group.querySelectorAll('.toggle, .chip, button');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                target.classList.add('active');
+            });
+        });
+
+        const imageCount = document.getElementById('image-count');
+        const imageCountDisplay = document.getElementById('image-count-display');
+        imageCount.addEventListener('input', () => {
+            imageCountDisplay.textContent = imageCount.value;
+        });
+
+        const privateMode = document.getElementById('private-mode');
+        privateMode.addEventListener('click', () => {
+            const isActive = privateMode.classList.toggle('active');
+            privateMode.setAttribute('aria-pressed', String(isActive));
+        });
+
+        const overlay = document.getElementById('preview-overlay');
+        const previewImage = document.getElementById('preview-image');
+        const previewTitle = document.getElementById('preview-title');
+        const previewDescription = document.getElementById('preview-description');
+        const previewTags = document.getElementById('preview-tags');
+        const previewClose = document.getElementById('preview-close');
+
+        function openPreview(card) {
+            const image = card.querySelector('img');
+            previewImage.src = image.src;
+            previewImage.alt = image.alt;
+            previewTitle.textContent = card.dataset.previewTitle || card.querySelector('h3').textContent;
+            previewDescription.textContent = card.dataset.previewDescription || card.querySelector('p').textContent;
+            previewTags.textContent = card.dataset.previewTags || Array.from(card.querySelectorAll('.card-tags span')).map(tag => tag.textContent).join(' · ');
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closePreview() {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            previewImage.src = '';
+            previewImage.alt = '';
+        }
+
+        document.querySelectorAll('.preview-button').forEach(button => {
+            button.addEventListener('click', event => {
+                const card = event.target.closest('.gallery-card');
+                if (card) {
+                    openPreview(card);
+                }
+            });
+        });
+
+        overlay.addEventListener('click', event => {
+            if (event.target === overlay) {
+                closePreview();
+            }
+        });
+
+        previewClose.addEventListener('click', closePreview);
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && overlay.classList.contains('active')) {
+                closePreview();
+            }
+        });
+    </script>
 </body>
 </html>
